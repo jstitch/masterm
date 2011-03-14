@@ -21,6 +21,14 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "utils.h"
+
+#ifdef LOCALE_TRANSLATION
+#include <libintl.h>
+#define _(String) gettext (String)
+#endif
+
 #include "curstextlib.h"
 
 extern int norepit;
@@ -40,7 +48,7 @@ void screen(void);
 
 //Utility screen functions
 void title(void);
-void salir(void);
+void quit(void);
 
 //Game result message functions
 void winner(int);
@@ -54,7 +62,7 @@ void init_screen() {
     initscr();
     cbreak();
     noecho();
-    if(has_colors()) {
+    if (has_colors()) {
 	start_color();
 	init_pair(BLACK, BLACK, BLACK);
 	init_pair(RED, RED,     BLACK);
@@ -105,7 +113,7 @@ void menu(void) {
     mscreen();
     opc = getKeyPrompt("", 1, sizeY());
     
-    while(1) {
+    while (1) {
 	if(opc=='1' || opc=='2' ||
 	   opc=='3' || opc=='4')//options 1 - 4
 	    (*f[opc-48-1])();
@@ -118,18 +126,41 @@ void menu(void) {
 	mscreen();
 	opc = getKeyPrompt("", 1, sizeY());
     }
-    salir();//good-bye
+    quit();//good-bye
 }
 
 /*MAIN MENU SCREEN*/
 void mscreen(void) {
     title();
-    printText("Elige una opcion:", 1, 5, WHITE, BLACK);
-    printText("1 Instrucciones", 2, 8, WHITE, BLACK);
-    printText("2 Jugar", 2, 11, WHITE, BLACK);
-    printText("3 Opciones", 2, 14, WHITE, BLACK);
-    printText("4 Acerca de...", 2, 17, WHITE, BLACK);
-    printText("5 Salir", 2, 20, WHITE, BLACK);
+    
+    char * txt1 = (char *)malloc(3 + strlen(_(menuOptInst)) + 1);
+    txt1[0] = '\0';
+    txt1 = strcat(txt1, "1 ");
+    char * txt2 = (char *)malloc(3 + strlen(_(menuOptPlay)) + 1);
+    txt2[0] = '\0';
+    txt2 = strcat(txt2, "2 ");
+    char * txt3 = (char *)malloc(3 + strlen(_(menuOptOptions)) + 1);
+    txt3[0] = '\0';
+    txt3 = strcat(txt3, "3 ");
+    char * txt4 = (char *)malloc(3 + strlen(_(menuOptAbout)) + 1);
+    txt4[0] = '\0';
+    txt4 = strcat(txt4, "4 ");
+    char * txt5 = (char *)malloc(3 + strlen(_(menuOptQuit)) + 1);
+    txt5[0] = '\0';
+    txt5 = strcat(txt5, "5 ");
+    
+    printText(_(menuInst), 1, 5, WHITE, BLACK);
+    printText(strcat(txt1, _(menuOptInst)), 2, 8, WHITE, BLACK);
+    printText(strcat(txt2, _(menuOptPlay)), 2, 11, WHITE, BLACK);
+    printText(strcat(txt3, _(menuOptOptions)), 2, 14, WHITE, BLACK);
+    printText(strcat(txt4, _(menuOptAbout)), 2, 17, WHITE, BLACK);
+    printText(strcat(txt5, _(menuOptQuit)), 2, 20, WHITE, BLACK);
+    
+    free(txt1);
+    free(txt2);
+    free(txt3);
+    free(txt4);
+    free(txt5);
 }
 
 /*GAME'S MAIN SCREEN*/
@@ -137,12 +168,12 @@ void screen(void) {
     int cont;
     
     title();
-    printStyleText("Puedes usar la logica para adivinar la combinacion en menos de 10 turnos?",
+    printStyleText(_(playInst),
 		   SUBTITLE_TEXT);
-    printStyleText("Para salir en cualquier momento teclea 'Q'",
+    printStyleText(_(playInst2),
 		   STATUS_TEXT);
     
-    for(cont = 5; cont <= 23; cont += 2) {
+    for (cont = 5; cont <= 23; cont += 2) {
 	printText("___   ___   ___   ___",
 		  1, cont,
 		  LIGHTRED, BLACK);//user input spaces
@@ -152,9 +183,9 @@ void screen(void) {
     }
     
     /*(Help system) keys corresponding to each color*/
-    printText("Color ", 65, 6, WHITE, BLACK);
+    printText(_(playColor), 65, 6, WHITE, BLACK);
     printText("###", 71, 6, WHITE, BLACK);
-    printText("Posicion ", 62, 8, WHITE, BLACK);
+    printText(_(playPosition), 62, 8, WHITE, BLACK);
     printText("###", 71, 8, YELLOW, BLACK);
     
     printText("1 ", 69, 12, WHITE, BLACK);
@@ -181,7 +212,7 @@ void opcs(void) {
     char intro;
     while(1) {
 	title();
-	printStyleText("Opciones. Teclea el numero de la opcion que quieres modificar, 'Q' para salir",
+	printStyleText(_(optionsInst),
 		       SUBTITLE_TEXT);
 	
 	printText("1 ", 1, 7, WHITE, BLACK);
@@ -189,7 +220,7 @@ void opcs(void) {
 	    printText("_", 3, 7, WHITE, BLACK);
 	else
 	    printText("X", 3, 7, WHITE, BLACK);
-	printText(" PERMITIR REPETIR COLORES EN LA COMBINACION SECRETA",
+	printText(_(optionsOpt1),
 		  4, 7, WHITE, BLACK);
 	
 	intro = getKeyPrompt("", 1, sizeY());
@@ -207,108 +238,172 @@ void opcs(void) {
 /*Title*/
 void title(void) {
     clearScreen();
-    printStyleText(" M a s t e r M i n d ", TITLE_TEXT);
+    printStyleText(untrim(_(programTitle)), TITLE_TEXT);
 }
 
 /*ERROR SCREEN*/
 void error(void) {
     title();
-    printStyleText("ERROR !!!!", MESSAGE_TEXT);
+    printStyleText(_(errorMessage), MESSAGE_TEXT);
     doBeep();
     doBeep();
     getKey();
 }
 
 /*QUIT SCREEN*/
-void salir(void) {
+void quit(void) {
     title();
-    char *bye = " A D I O S!!! ";
+    char *bye = _(final);
     printText(bye, centerX(bye), centerY(bye), YELLOW, BLUE);
-    printText("Javier Novoa C.", 1, sizeY(), WHITE, BLUE);
+    printText(_(author), 1, sizeY(), WHITE, BLUE);
     getKey();//gracias por usar mi programa
 }
 
 /*ABOUT SCREEN*/
 void about(void) {
     title();
-    printText("MasterMind 1.1", 1, 3, YELLOW, BLACK);
-    printText("Hecho por JStitch (Javier Novoa)",
+    
+    char *txt1 = (char *) malloc (strlen(_(programTitle)) + 1 + 2 + strlen(_(versionNumber)) + 1);
+    txt1 [0] = '\0';
+    strcat(txt1, _(programTitle));
+    strcat(txt1, " ");
+    strcat(txt1, _(versionNumber));
+    printText(txt1, 1, 3, YELLOW, BLACK);
+    
+    char *txt2 = (char *) malloc (strlen(_(aboutAuthor)) + 1 + 2 + strlen(_(authorNick)) + 1 + 3 + strlen(_(author)) + 1 + 2);
+    txt2 [0] = '\0';
+    strcat(txt2, _(aboutAuthor));
+    strcat(txt2, " ");
+    strcat(txt2, _(authorNick));
+    strcat(txt2, " (");
+    strcat(txt2, _(author));
+    strcat(txt2, ")");
+    
+    printText(txt2,
 	      1, 5, YELLOW, BLACK);//Este soy yo
-    printText("9 de diciembre de 1998 (Ultima actualizacion, 23 de enero de 2009)",
+    
+    char *txt3 = (char *) malloc (strlen(_(aboutDate)) + 1 + 3 + strlen(_(aboutLastUpdate)) + 1 + 2 + strlen(_(lastUpdateDate)) + 1 + 3 + strlen(_(lastUpdateYear)) + 1 + 2);
+    txt3[0] = '\0';
+    strcat(txt3, _(aboutDate));
+    strcat(txt3, " (");
+    strcat(txt3, _(aboutLastUpdate));
+    strcat(txt3, " ");
+    strcat(txt3, _(lastUpdateDate));
+    strcat(txt3, ", ");
+    strcat(txt3, _(lastUpdateYear));
+    strcat(txt3, ")");
+    printText(txt3,
 	      1, 7, YELLOW, BLACK);
-    printText("Escuela Superior de Computo, ESCOM-IPN",
+    
+    printText(_(aboutPlace),
 	      1, 9, YELLOW, BLACK);
-    printText("Copyleft 1998, 2009, Javier Novoa C., Mexico, D.F.",
+    
+    char *txt4 = (char *) malloc (strlen(_(aboutCopyleft)) + 1 + 2 + strlen(_(lastUpdateYear)) + 1 + 3 + strlen(_(author)) + 1 + 3 + strlen(_(aboutCity)) + 1);
+    txt4[0] = '\0';
+    strcat(txt4, _(aboutCopyleft));
+    strcat(txt4, "-");
+    strcat(txt4, _(lastUpdateYear));
+    strcat(txt4, ", ");
+    strcat(txt4, _(author));
+    strcat(txt4, ", ");
+    strcat(txt4, _(aboutCity));
+    printText(txt4,
 	      1, 11, YELLOW, BLACK);
-    printText("e-mail: jstitch@gmail.com", 1, 13, YELLOW, BLACK);
-    printText("Este programa no incluye NINGUNA GARANTIA. Este programa es Software Libre,",
+    
+    char *txt5 = (char *) malloc (strlen(_(aboutEmail)) + 1 + 2 + strlen(_(authorEmail)));
+    txt5[0] = '\0';
+    strcat(txt5, _(aboutEmail));
+    strcat(txt5, " ");
+    strcat(txt5, _(authorEmail));
+    printText(txt5, 1, 13, YELLOW, BLACK);
+    
+    printText(_(about1),
 	      1, 15, YELLOW, BLACK);
-    printText("puedes redistribuirlo solo bajo los terminos de la Licencia Publica General de",
+    printText(_(about2),
 	      1, 16, YELLOW, BLACK);
-    printText("GNU, version 2 o posterior (siempre y cuando se conserven los principios que",
+    printText(_(about3),
 	      1, 17, YELLOW, BLACK);
-    printText("hacen de este programa un software libre). Debiste haber recibido el archivo",
+    printText(_(about4),
 	      1, 18, YELLOW, BLACK);
-    printText("LICENSE junto con los archivos de este programa. Si no es asi, comunicate con",
+    printText(_(about5),
 	      1, 19, YELLOW, BLACK);
-    printText("el autor del programa. Para mas informacion, lee el archivo LICENSE o visita el",
+    printText(_(about6),
 	      1, 20, YELLOW, BLACK);
-    printText("sitio en internet de la FSF http://www.gnu.org/licenses/gpl.html",
+    printText(_(about7),
 	      1, 21, YELLOW, BLACK);
+    printText(_(about8),
+	      1, 22, YELLOW, BLACK);
+    
+    free(txt1);
+    free(txt2);
+    free(txt3);
+    free(txt4);
+    free(txt5);
+    
     getKeyPrompt("", 1, sizeY());
 }
 
 /*ONLINE INSTRUCTIONS SCREEN*/
 void inst(void) {
     title();
-    printText("Para jugar elige la opcion 2 del menu",
+    printText(_(inst1),
 	      1, 3, WHITE, BLACK);
-    printText("Para las opciones del juego elige la opcion 3 del menu",
+    printText(_(inst2),
 	      1, 4, WHITE, BLACK);
-    printText("Para informacion del juego elige la opcion 4 del menu",
+    printText(_(inst3),
 	      1, 5, WHITE, BLACK);
-    printText("Para salir del juego elige la opcion 5 del menu",
+    printText(_(inst4),
 	      1, 6, WHITE, BLACK);
     
-    char *txt1 = "Teclea un numero del 1 al 6 para elegir un color en las posiciones ";
+    char *txt1 = _(inst5);
+    char *txt2 = _(inst6);
+    char *txt3 = _(inst7);
     printText(txt1, 1, 8, WHITE, BLACK);
-    printText("rojas", strlen(txt1) + 1, 8, LIGHTRED, BLACK);
-    printText(":", strlen(txt1) + 6, 8, WHITE, BLACK);
+    printText(txt2, strlen(txt1) + 1, 8, LIGHTRED, BLACK);
+    printText(txt3, strlen(txt1) + strlen(txt2) + 2, 8, WHITE, BLACK);
     
     printText("  1 ", 1, 9, WHITE, BLACK);
-    printText("Rojo", 5, 9, RED, BLACK);
+    printText(_(instRed), 5, 9, RED, BLACK);
     printText("  2 ", 1, 10, WHITE, BLACK);
-    printText("Verde", 5, 10, GREEN, BLACK);
+    printText(_(instGreen), 5, 10, GREEN, BLACK);
     printText("  3 ", 1, 11, WHITE, BLACK);
-    printText("Cafe", 5, 11, BROWN, BLACK);
+    printText(_(instBrown), 5, 11, BROWN, BLACK);
     printText("  4 ", 1, 12, WHITE, BLACK);
-    printText("Azul", 5, 12, BLUE, BLACK);
+    printText(_(instBlue), 5, 12, BLUE, BLACK);
     printText("  5 ", 1, 13, WHITE, BLACK);
-    printText("Magenta", 5, 13, MAGENTA, BLACK);
+    printText(_(instMagenta), 5, 13, MAGENTA, BLACK);
     printText("  6 ", 1, 14, WHITE, BLACK);
-    printText("Cyan", 5, 14, CYAN, BLACK);
+    printText(_(instCyan), 5, 14, CYAN, BLACK);
     
-    printText("Cuando tengas cada color establecido teclea INTRO.",
+    printText(_(inst8),
 	      1, 15, WHITE, BLACK);
-    printText("Puedes teclear BACKSPACE para deshacer un color de la misma jugada.",
+    printText(_(inst9),
 	      1, 16, WHITE, BLACK);
-    char *txt2 = "Aparecera un codigo en las posiciones ";
-    printText(txt2, 1, 18, WHITE, BLACK);
-    printText("azules", strlen(txt2) + 1, 18, LIGHTBLUE, BLACK);
-    printText(":", strlen(txt2) + 7, 18, WHITE, BLACK);
+    char *txt4 = _(inst10);
+    char *txt5 = _(inst11);
+    char *txt6 = _(inst12);
+    printText(txt4, 1, 18, WHITE, BLACK);
+    printText(txt5, strlen(txt4) + 1, 18, LIGHTBLUE, BLACK);
+    printText(txt6, strlen(txt4) + strlen(txt5) + 2, 18, WHITE, BLACK);
     
-    printText("  Blanco", 3, 19, WHITE, BLACK);
-    printText(" dice que le atinaste a algun color",
-	      11, 19, WHITE, BLACK);
-    printText("  Amarillo", 1, 20, YELLOW, BLACK);
-    printText(" dice que le atinaste tambien a su posicion",
-	      11, 20, WHITE, BLACK);
-    printText("Vacio dice que no tienes nada", 6, 21, WHITE, BLACK);
-    printText("Estos colores no se relacionan con el orden de tu entrada",
+    char *txt7 = _(inst13);
+    char *txt8 = _(inst15);
+    char *txt9 = _(inst17);
+    printText(txt7, 3, 19, WHITE, BLACK);
+    printText(_(inst14),
+	      strlen(txt7) + 3, 19, WHITE, BLACK);
+    
+    printText(txt8, 1, 20, YELLOW, BLACK);
+    printText(_(inst16),
+	      strlen(txt8) + 1, 20, WHITE, BLACK);
+    
+    printText(txt9, 6, 21, WHITE, BLACK);
+    printText(_(inst18), strlen(txt9) + 6, 21, WHITE, BLACK);
+    printText(_(inst19),
 	      1, 22, WHITE, BLACK);
-    printText("Tienes 10 intentos, el programa te calificara de acuerdo a lo bien que jugaste",
+    printText(_(inst20),
 	      1, 23, WHITE, BLACK);
-    printText("Trata de usar los menos posibles.   SUERTE!",
+    printText(_(inst21),
 	      1, 24, WHITE, BLACK);
     getKey();
 }
@@ -316,59 +411,60 @@ void inst(void) {
 /*WINNER SCREEN*/
 void winner(int numero) {
     title();
-    printText(" F E L I C I D A D E S !!!! ",
+    printText(_(win1),
 	      20, 5, LIGHTMAGENTA, DARKGRAY);
-    printText(" G A N A S T E ", 20, 10, LIGHTMAGENTA, DARKGRAY);
+    printText(_(win2), 20, 10, LIGHTMAGENTA, DARKGRAY);
     if(numero == 1)
-	printText(" WOW!!! en 1 intento!! ",
+	printText(_(win3),
 		  20, 15, LIGHTMAGENTA, DARKGRAY);
     else {
-	printText(" Lo hiciste en ", 20, 15, LIGHTMAGENTA, DARKGRAY);
+	char * txt1 = _(win4);
+	printText(txt1, 20, 15, LIGHTMAGENTA, DARKGRAY);
 	char txt[13];
 	sprintf(txt, "%d", numero);
-	printText(txt, 35, 15, LIGHTMAGENTA, DARKGRAY);
-	printText(" intentos ",
-		  35 + strlen(txt), 15, LIGHTMAGENTA, DARKGRAY);
+	printText(txt, 20 + strlen(txt1), 15, LIGHTMAGENTA, DARKGRAY);
+	printText(_(win5),
+		  20 + strlen(txt1) + strlen(txt), 15, LIGHTMAGENTA, DARKGRAY);
     }
     switch(numero) {
 	case 1:
-	    printText("Pura suerte (o hiciste trampa?)",
+	    printText(_(result1),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 2:
-	    printText("Has tenido mucha suerte, pero no usas la logica",
+	    printText(_(result2),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 3:
-	    printText("Has tenido algo de suerte, trata de usar la logica",
+	    printText(_(result3),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 4:
-	    printText("Has tenido suerte, usa la logica",
+	    printText(_(result4),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 5:
-	    printText("Haces un excelente uso de la logica, FELICIDADES!",
+	    printText(_(result5),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 6:
-	    printText("Haces un muy buen uso de la logica, FELICIDADES!",
+	    printText(_(result6),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 7:
-	    printText("Haces un buen uso de la logica",
+	    printText(_(result7),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 8:
-	    printText("Haces un uso regular de la logica, trata de mejorar",
+	    printText(_(result8),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 9:
-	    printText("Haces un mal uso de la logica, practica un poco mas",
+	    printText(_(result9),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
 	case 10:
-	    printText("Tienes un pesimo uso de la logica, practica mas",
+	    printText(_(result10),
 		      20, 16, LIGHTMAGENTA, DARKGRAY);
 	    break;
     }
@@ -387,9 +483,9 @@ void looser(int solucion[]) {
     int cont;
     
     title();
-    printText("PERDISTE =_-(", 19, 5, LIGHTGRAY, BLACK);
+    printText(_(loose1), 19, 5, LIGHTGRAY, BLACK);
     doBeep();
-    printText("La respuesta era:", 19, 7, LIGHTGRAY, BLACK);
+    printText(_(loose2), 19, 7, LIGHTGRAY, BLACK);
     
 #ifdef COLORBLIND
     for(cont = 0; cont <= 3; cont++)
@@ -403,5 +499,5 @@ void looser(int solucion[]) {
           6 * cont + 20, 10, solucion[cont], BLACK);
 #endif
     
-    printText("Practica mucho mas", 19, 15, WHITE, BLACK);
+    printText(_(loose3), 19, 15, WHITE, BLACK);
 }

@@ -1,4 +1,4 @@
-MasterMind 1.1b
+MasterMind 1.1.1b
 by Javier Novoa C.
 
 
@@ -14,9 +14,10 @@ Borland C++ 3.1 IDE. Now I've used MAKE, GCC and GDB as main developing tools
 I've used these tools on Linux 2.6.22, on an OpenSuSe 10.3 distribution.
 
 Please mind that MasterMind was originally written from a spanish language
-perspective, so the interface of the program is currently in that
+perspective, so the interface of the program was originally written in that
 language. One of the TODOs in my list is to write a good localization support
-for it, so that this won't be a problem any more. But even though this fact, I
+for it, so that this won't be a problem any more. The purpose of version 1.1.1
+is to implement that localization support. But even though this fact, I
 consider the interface to be pretty simple, so it shouldn't be a problem
 learning to use it by simple experimentation, at least until an english
 interface is actually implemented.
@@ -54,6 +55,7 @@ This distribution of Masterind includes the following files:
 -masterm.h the main header file
 -cursors.h the cursors interface 'main' file
 -curstextlib.h the cursors interface header file
+-languages.h adds a basic translation system and an english translation
 
 
 FEEDBACK

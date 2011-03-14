@@ -1,9 +1,9 @@
 all : masterm.c masterm.h cursors.h curstextlib.h
-	gcc masterm.c -W -Wall -lncurses -o masterm
+	gcc masterm.c -W -Wall -lncurses -o masterm -DLOCALEDIR=\"\"
 	chmod +x masterm
 
-colorblind : masterm.c masterm.h cursors.h curstextlib.h 
-	gcc masterm.c -W -Wall -lncurses -o masterm -DCOLORBLIND
+colorblind : masterm.c masterm.h cursors.h curstextlib.h
+	gcc masterm.c -W -Wall -lncurses -o masterm -DLOCALEDIR=\"\" -DCOLORBLIND
 	chmod +x masterm
 
 debug : masterm.c masterm.h cursors.h curstextlib.h

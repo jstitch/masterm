@@ -40,6 +40,7 @@
 */
 
 #define CURSORS_INTERFACE 1
+#define LOCALE_TRANSLATION 1
 
 #include <time.h>
 #include "masterm.h"

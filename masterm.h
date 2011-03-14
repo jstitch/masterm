@@ -20,6 +20,10 @@
   this program; if not, please contact the current project maintainer.
 */
 
+#include "languages.h"
+#include <libintl.h>
+#include <locale.h>
+
 #ifdef CURSORS_INTERFACE
 #include "cursors.h"
 #endif
@@ -42,6 +46,11 @@ void whathappens(int [], int, int);
 void init() {
 #ifdef CURSORS_INTERFACE
     init_screen();
+#endif
+#ifdef LOCALE_TRANSLATION
+    setlocale(LC_MESSAGES, "");
+    bindtextdomain("masterm", LOCALEDIR);
+    textdomain("masterm");
 #endif
 }
 
@@ -95,7 +104,7 @@ int nrep(int ind, int arr[]) {
  * This function is too tied to the interface, TODO: CHANGE!!*/
 void play(int guess[],int *pos, int *f, int *win) {
 #ifdef COLORBLIND
-    char colorblind_text[4];
+	char colorblind_text[4];
 #endif
     void aim(int [], int [], int *, int *);
     char intro;
@@ -113,7 +122,7 @@ void play(int guess[],int *pos, int *f, int *win) {
 	    turn[x] = intro - 48;//48:ASCII code of '0'
 #ifdef CURSORS_INTERFACE
 #ifdef COLORBLIND
-	    snprintf(colorblind_text, 4, "#%d#", turn[x]);
+		snprintf(colorblind_text, 4, "#%d#", turn[x]);
 	    printText(colorblind_text, (x * 6) + 1, (*pos * 2) + 4, turn[x], BLACK);
 #else
 	    printText("###", (x * 6) + 1, (*pos * 2) + 4, turn[x], BLACK);

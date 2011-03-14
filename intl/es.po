@@ -1,0 +1,350 @@
+# MasterMind to Spanish.
+# Copyright (C) 1998-2009
+# This file is distributed under the same license as the MasterMind package.
+# Javier Novoa C. <jstitch@gmail.com>, 2009.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MasterMind 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-17 18:31-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Javier Novoa C. <jstitch@gmail.com>\n"
+"Language-Team: Spanish <jstitch@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: languages.h:29
+msgid "MasterMind"
+msgstr ""
+
+#: languages.h:30
+msgid "1.1"
+msgstr ""
+
+#: languages.h:31
+msgid "Javier Novoa C."
+msgstr ""
+
+#: languages.h:32
+msgid "JStitch"
+msgstr ""
+
+#: languages.h:33
+msgid "jstitch@gmail.com"
+msgstr ""
+
+#: languages.h:35
+msgid "July 11"
+msgstr ""
+
+#: languages.h:36
+msgid "2009"
+msgstr ""
+
+#: languages.h:38
+msgid "Copyleft 1998"
+msgstr ""
+
+#: languages.h:39
+msgid "Mexico, D.F."
+msgstr ""
+
+#: languages.h:40
+msgid "Escuela Superior de Computo, ESCOM-IPN"
+msgstr ""
+
+#: languages.h:41
+msgid "e-mail:"
+msgstr ""
+
+#: languages.h:43
+msgid "ERROR !!!!"
+msgstr ""
+
+#: languages.h:45
+msgid "Pick an option:"
+msgstr ""
+
+#: languages.h:46
+msgid "How to play"
+msgstr ""
+
+#: languages.h:47
+msgid "Play"
+msgstr ""
+
+#: languages.h:48
+msgid "Options"
+msgstr ""
+
+#: languages.h:49
+msgid "About..."
+msgstr ""
+
+#: languages.h:50
+msgid "Quit"
+msgstr ""
+
+#: languages.h:52
+msgid ""
+"Can you use logic to guess the secret combination in less than 10 turns?"
+msgstr ""
+
+#: languages.h:53
+msgid "Press 'Q' at any moment to quit"
+msgstr ""
+
+#: languages.h:54
+msgid "Color "
+msgstr ""
+
+#: languages.h:55
+msgid "Position "
+msgstr ""
+
+#: languages.h:57
+msgid ""
+"Options. Press the number of the option you want to modify, to quit press 'Q'"
+msgstr ""
+
+#: languages.h:58
+msgid " ALLOW COLOR REPETITIONS EN SECRET COMBINATION (DIFFICULT MODE)"
+msgstr ""
+
+#: languages.h:60
+msgid "To start playing, pick option 2 from main menu"
+msgstr ""
+
+#: languages.h:61
+msgid "For game options, pick option 3 from main menu"
+msgstr ""
+
+#: languages.h:62
+msgid "For game informtation, pick option 4 from main menu"
+msgstr ""
+
+#: languages.h:63
+msgid "To quit the game, pick option 5 from main menu"
+msgstr ""
+
+#: languages.h:64
+msgid "Press a number between 1 and 6 to pick a color in to the "
+msgstr ""
+
+#: languages.h:65
+msgid "red"
+msgstr ""
+
+#: languages.h:66 languages.h:77
+msgid "positions:"
+msgstr ""
+
+#: languages.h:67
+msgid "Red"
+msgstr ""
+
+#: languages.h:68
+msgid "Green"
+msgstr ""
+
+#: languages.h:69
+msgid "Brown"
+msgstr ""
+
+#: languages.h:70
+msgid "Blue"
+msgstr ""
+
+#: languages.h:71
+msgid "Magenta"
+msgstr ""
+
+#: languages.h:72
+msgid "Cyan"
+msgstr ""
+
+#: languages.h:73
+msgid "When you have each color established, press INTRO."
+msgstr ""
+
+#: languages.h:74
+msgid "You can press BACKSPACE to undo a color in the current turn."
+msgstr ""
+
+#: languages.h:75
+msgid "A code will appear in the "
+msgstr ""
+
+#: languages.h:76
+msgid "blue"
+msgstr ""
+
+#: languages.h:78
+msgid "  White"
+msgstr ""
+
+#: languages.h:79
+msgid " says that you hit some color"
+msgstr ""
+
+#: languages.h:80
+msgid "  Yellow"
+msgstr ""
+
+#: languages.h:81
+msgid " says that you hit also its position"
+msgstr ""
+
+#: languages.h:82
+msgid "Empty"
+msgstr ""
+
+#: languages.h:83
+msgid " says you have nothing"
+msgstr ""
+
+#: languages.h:84
+msgid "The order of these colors has no relation with the order of your input"
+msgstr ""
+
+#: languages.h:85
+msgid ""
+"You have 10 tries, the program will evaluate your performance at the end"
+msgstr ""
+
+#: languages.h:86
+msgid "Try to use the least of them.   GOOD LUCK!"
+msgstr ""
+
+#: languages.h:88
+msgid "Written by"
+msgstr ""
+
+#: languages.h:89
+msgid "december 9 1998"
+msgstr ""
+
+#: languages.h:90
+msgid "last update"
+msgstr ""
+
+#: languages.h:91
+msgid ""
+"This program comes with ABSOLUTELY NO WARRANTY. This program is Free "
+"Software,"
+msgstr ""
+
+#: languages.h:92
+msgid ""
+"and you may redistribute it only under the terms of the General Public "
+"License"
+msgstr ""
+
+#: languages.h:93
+msgid ""
+"as published by the Free Software Foundation, either version 2 or any later"
+msgstr ""
+
+#: languages.h:94
+msgid ""
+"version (always preserving the means by which they made this a free "
+"software)."
+msgstr ""
+
+#: languages.h:95
+msgid ""
+"You must have received a file named LICENSE within this program distribution."
+msgstr ""
+
+#: languages.h:96
+msgid ""
+"If not, please contact the author of this program. For more information, "
+"please"
+msgstr ""
+
+#: languages.h:97
+msgid "read the file named LICENSE or visit the FSF web site at "
+msgstr ""
+
+#: languages.h:98
+msgid "http://www.gnu.org/licenses/gpl.html"
+msgstr ""
+
+#: languages.h:100
+msgid " C O N G R A T U L A T I O N S !!!! "
+msgstr ""
+
+#: languages.h:101
+msgid " Y O U   W O N "
+msgstr ""
+
+#: languages.h:102
+msgid " WOW!!! in 1 try!! "
+msgstr ""
+
+#: languages.h:103
+msgid " You made it in "
+msgstr ""
+
+#: languages.h:104
+msgid " tries "
+msgstr ""
+
+#: languages.h:106
+msgid "Pure luck (or did you cheated?)"
+msgstr ""
+
+#: languages.h:107
+msgid "You had a lot of luck, but you didn't used logic"
+msgstr ""
+
+#: languages.h:108
+msgid "You had some luck, try to use logic instead"
+msgstr ""
+
+#: languages.h:109
+msgid "You had luck, use logic instead"
+msgstr ""
+
+#: languages.h:110
+msgid "You make an excellent use of logic, CONGRATULATIONS!"
+msgstr ""
+
+#: languages.h:111
+msgid "You make good use of logic, CONGRATULATIONS!"
+msgstr ""
+
+#: languages.h:112
+msgid "You make good use of logic"
+msgstr ""
+
+#: languages.h:113
+msgid "You make use of logic, but you can improve it"
+msgstr ""
+
+#: languages.h:114
+msgid "You make a bad use of logic, practice a little more"
+msgstr ""
+
+#: languages.h:115
+msgid "You have an awful use of logic, practice a lot more"
+msgstr ""
+
+#: languages.h:117
+msgid "YOU LOST =_-("
+msgstr ""
+
+#: languages.h:118
+msgid "Correct answer was:"
+msgstr ""
+
+#: languages.h:119
+msgid "Practice a lot more"
+msgstr ""
+
+#: languages.h:121
+msgid " G O O D B Y E!!! "
+msgstr ""

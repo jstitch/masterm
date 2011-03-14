@@ -1,4 +1,4 @@
-MasterMind 1.1b
+MasterMind 1.1.1b
 
 
 HISTORY
@@ -27,7 +27,10 @@ january) could give my then girlfriend (and now wife) a nice gift ;-) Since
 she is a psychologist, she had told me about an evaluation scale for the
 Master Mind game, which I included in this version
 
-version 1.1, the current version, is the port to GNU/Linux of MasterMind
+version 1.1, is the port to GNU/Linux of MasterMind
 
-version 1.1b came from a patch by Felix Herrmann so that colorblind people can
-play the game by showing the number of the inputs, besides of the color
+version 1.1.1, the current version, implements a basic translation system, and
+adds an english translation to it
+
+version 1.1.1b came from a patch by Felix Herrmann so that colorblind people
+can play the game by showing the number of the inputs, besides of the color

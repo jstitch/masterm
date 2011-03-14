@@ -1,4 +1,4 @@
-MasterMind 1.1b
+MasterMind 1.1.1b
 
 
 TODO
@@ -31,5 +31,8 @@ cursors library, so the changes might have broken something about the conio
 library...
 
 
-3) I surely have to translate Master Mind's interface to English. A good
-localization to support multiple languages might be the best solution.
+3) I have translated Master Mind to English, implementing a very basic
+translation system in compilation time. Work needs to be done to refine this,
+and maybe to add functionality so it works in real time. Currently, I am
+trying to implement a localization support using gettext. It is an incomplete
+implementation though.
