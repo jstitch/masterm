@@ -1,0 +1,33 @@
+MasterMind 1.1b
+
+
+HISTORY
+-------
+
+version 1.0 was first done at my school days at ESCOM (Escuela Superior de
+Computo, from the IPN - Instituto Politecnico Nacional at Mexico city) in
+1998, as my first school project in C for the first semester of Programming
+Languages in that school. It is perhaps the first game I've ever wrote (note,
+though, that it is not my first program, I've been programming in C since my
+nbachelor days, sometime around 1996, and have done primitive programming in
+prehistoric languages like BASIC some years before too). Why I chose Master
+Mind as my first programming project in C has its history too: when I was an
+almost 12 years old kid, I've got operated from my appendix, and someone
+(can't remember who, perhaps some aunt), gave me as a gift a version of that
+fine mental board game. Since then it's been one of my favorites (despite the
+fact that I play it seldom, just as seldom as I used to maintain this program
+unitl now :-P)
+
+version 1.0.1 improved the help and about online sections
+
+version 1.0.2 came from my efforts in 2006 to upgrade the program so the Three
+Wise Men (the 'Tres Reyes Magos', a mexican tradition (and surely from some
+other places with hispanic/catholic traditions) for kids celebrated every 6th
+january) could give my then girlfriend (and now wife) a nice gift ;-) Since
+she is a psychologist, she had told me about an evaluation scale for the
+Master Mind game, which I included in this version
+
+version 1.1, the current version, is the port to GNU/Linux of MasterMind
+
+version 1.1b came from a patch by Felix Herrmann so that colorblind people can
+play the game by showing the number of the inputs, besides of the color

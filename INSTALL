@@ -1,0 +1,29 @@
+MasterMind 1.1b
+
+
+COMPILING
+---------
+
+MasterMind just needs the Curses library, so doing a
+
+   cc masterm.c -lncurses -o masterm
+
+might be just enough.
+
+There is a makefile included, so running
+
+   make
+
+is the easiest way. Please mind that the makefile supposes you have GCC
+installed on your system
+
+There is a colorblind target, to compile masterm for colorblind support:
+
+   make colorblind
+
+
+RUNNING
+-------
+
+Once compiled, a file named masterm should be generated. Just run that and
+ENJOY!

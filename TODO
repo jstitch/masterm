@@ -1,0 +1,35 @@
+MasterMind 1.1b
+
+
+TODO
+----
+
+1) I wish to separate CLEANLY the engine of the game from the interface.
+
+Efforts to bring version 1.1 have made an almost complete restructuration of
+the code, by adding .h files (originally everything was in a single .c file!),
+each one of them tries to execute specialized tasks: masterm.c and masterm.h
+try to be the engine, cursors.h and curstextlib.h try to be the cursors
+interface (therefore bringing up the possibility to have another interface
+too).
+
+Maybe a good solution would be to have the engine as a separate process
+expecting commands via a socket (or some other kind of IPC), and emitting
+results in the same way. That way, the interface could be the program the user
+calls, with any interface you choose (cursors, text mode, etc.), and this
+interface program then exec()s the engine and communicates with it via the
+commands & through the socket. I don't know, have to think about it a little
+more for a while...
+
+
+2) I haven't tested 1.1 for MS-DOS compatibility, and perhaps I won't, but if
+there's someone willing to do that, and help me fix any problems, I will be
+glad to receive the extra help. Since 1.1, I tried to abstract the behaviour
+of the interface from the engine, so I changed the conio routines embedded in
+the code to more general calls, in the effort to make curses the default
+cursors library, so the changes might have broken something about the conio
+library...
+
+
+3) I surely have to translate Master Mind's interface to English. A good
+localization to support multiple languages might be the best solution.

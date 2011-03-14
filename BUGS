@@ -1,0 +1,9 @@
+MasterMind 1.1b
+
+
+BUGS
+----
+
+1) There is a bug when using a display terminal of less than 25 lines, the
+messages displayed in the bottom line may get overlapped with other screen
+output, specially in the 'playing the game' screen.
