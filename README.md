@@ -48,6 +48,7 @@ CONTENTS
 --------
 
 This distribution of Masterind includes the following files:
+
 - README this readme file
 - LICENSE licensing information
 - INSTALL information on compiling and running the program
